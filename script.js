@@ -1,4 +1,5 @@
 const inputs = document.getElementById("search");
+let searchBox = document.getElementById("search");
 // console.log(search);
 let result;
 const URL = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false`;
@@ -20,9 +21,9 @@ function sortByMkt() {
   createElement(result);
 }
 
-inputs.addEventListener("change", handleChange());
-function handleChange() {
+searchBox.addEventListener("input", () => {
   let values = document.getElementById("search").value;
+  console.log(values);
   if (values === "") {
     fetchData();
   }
@@ -31,7 +32,8 @@ function handleChange() {
   );
 
   createElement(res);
-}
+});
+
 function sortByPercentage() {
   result = result.sort(
     (a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h
